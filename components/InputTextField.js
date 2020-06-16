@@ -6,6 +6,7 @@ const {width, height} = Dimensions.get('window')
 
 
 
+
 const InputTextField = (props) => {
     return (
         <View style={props.style}>
@@ -13,6 +14,7 @@ const InputTextField = (props) => {
                 placeholder={props.placeholderText}
                 secureTextEntry={props.isSecure}
                 style={styles.input}
+                onChangeText={ _ => props.getData(_)}
             />
 
         </View>

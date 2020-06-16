@@ -1,27 +1,95 @@
-import React from 'react'
-import {View, Text, StyleSheet, Dimensions} from 'react-native'
+import React, { Component } from 'react'
+import axios from 'axios'
+import {View, Text, StyleSheet, Dimensions, Alert} from 'react-native'
 import InputTextField from '../components/InputTextField'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-
 const {width, height} = Dimensions.get('window')
 
-const Signup = () => {
-    return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.titleSignup}>Register to WHIMS</Text>
-            <InputTextField style={styles.inputText} placeholderText='Full Name' isSecure={false}/>
-            <InputTextField style={styles.inputText} placeholderText='Email' isSecure={false}/>
-            <InputTextField style={styles.inputText} placeholderText='Mobile Number' isSecure={false}/>
-            <InputTextField style={styles.inputText} placeholderText='Password' isSecure={true}/>
-            <InputTextField style={styles.inputText} placeholderText='Confirm Password' isSecure={true}/>
-            <TouchableOpacity
-                style={styles.loginButton}
-                onPress={() => console.log('ok')}
-            >
-                <Text style={styles.loginText}>Signup</Text>
-            </TouchableOpacity>
-        </ScrollView>
-    )
+export default class Signup extends Component {
+
+    constructor (props) {
+        super(props)
+        this.state = {
+            name : '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+
+    }
+    handleSubmit = name => {
+        const data = { 
+            'email':this.state.email,
+            'password':this.state.password,
+            'confirm_password':this.state.confirmPassword
+        }
+ 
+        // alert(this.state.email)
+
+        axios.post(
+            'http://192.168.1.8:80/signup', 
+            {
+                email: this.state.email,
+                password: this.state.password,
+                confirm_password: this.state.confirmPassword
+            },
+            {
+               headers: {
+                //    'api-token': 'xyz',
+                    //other header fields
+               }
+            }
+        ).then( res => {
+            if(res.data.pool){
+                alert('Thank you for registring to WHIMS \nPlease check your Email to verify your account.')
+            }else
+                {if(res.data.code === 'InvalidParameterException') {
+                    alert('Please Fill the required information')
+
+                }else{ 
+                    if(res.data.code === 'UsernameExistsException'){
+                        alert('This email address already has a whims account!')
+                    }
+                }}
+
+        }).catch( err => {
+            console.log(err)
+        });
+        
+      }
+
+      getName = _ => {
+        this.setState({ name: _ })
+      }
+      getMail = _ => {
+        this.setState({ email: _ })
+      }
+      getPassword = _ => {
+        this.setState({ password: _ })
+      }
+      getCPassword = _ => {
+        this.setState({ confirmPassword: _ })
+      }
+
+    render() {
+        return (
+            <ScrollView style={styles.container}>
+                <Text style={styles.titleSignup}>Register to WHIMS</Text>
+                <InputTextField style={styles.inputText} placeholderText='Full Name' isSecure={false} getData={this.getName} />
+                <InputTextField style={styles.inputText} placeholderText='Email' isSecure={false} getData = {this.getMail} />
+                <InputTextField style={styles.inputText} placeholderText='Mobile Number' isSecure={false}/>
+                <InputTextField style={styles.inputText} placeholderText='Password' isSecure={true} getData = {this.getPassword} />
+                <InputTextField style={styles.inputText} placeholderText='Confirm Password' isSecure={true} getData = {this.getCPassword} />
+                <TouchableOpacity
+                    style={styles.loginButton}
+                    onPress={ () => this.handleSubmit(this.state.name)}
+                >
+                    <Text style={styles.loginText}>Signup</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -62,4 +130,9 @@ const styles = StyleSheet.create({
           fontSize: 16
       },
 })
-export default Signup
+
+// export default Signup;
+
+
+
+
