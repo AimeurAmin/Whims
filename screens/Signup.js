@@ -4,6 +4,9 @@ import { View, Text, StyleSheet, Dimensions, Alert } from "react-native";
 import InputTextField from "../components/InputTextField";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 const { width, height } = Dimensions.get("window");
+const config = require ('../appconfig.json')
+
+const baseUrl = config.baseUrl
 
 export default class Signup extends Component {
   constructor(props) {
@@ -27,7 +30,7 @@ export default class Signup extends Component {
 
     axios
       .post(
-        "https://gd1yvadkab.execute-api.us-east-2.amazonaws.com/latest/signup",
+        baseUrl+"/signup",
         {
           email: this.state.email,
           password: this.state.password,
@@ -72,6 +75,9 @@ export default class Signup extends Component {
   getCPassword = (_) => {
     this.setState({ confirmPassword: _ });
   };
+  getMobile = _ => {
+    console.log( _ )
+  }
 
   render() {
     return (
