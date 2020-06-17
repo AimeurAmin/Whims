@@ -43,7 +43,7 @@ const Login = ({ navigation }) => {
       <View style={styles.registerContainer}>
         <Text style={styles.noAccount}>Don't have an account?</Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Signup", { name: "Signup" })}
+          onPress={() => navigation.navigate("Register", { name: "Register" })}
         >
           <Text style={styles.register}>Register Now</Text>
         </TouchableOpacity>
@@ -63,14 +63,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     color: "#5735CE",
-    // fontFamily: "Poppins-Regular",
     fontSize: 48,
-    marginVertical: height * 0.2,
+    marginVertical: height * 0.17,
   },
   socialMediaButtons: {
     flexDirection: "row",
     alignSelf: "center",
-    marginTop: width * 0.02,
   },
   or: {
     fontFamily: "Poppins-Regular",
