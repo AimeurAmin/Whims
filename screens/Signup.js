@@ -27,7 +27,7 @@ export default class Signup extends Component {
 
     axios
       .post(
-        "http://192.168.1.8:80/signup",
+        "https://gd1yvadkab.execute-api.us-east-2.amazonaws.com/latest/signup",
         {
           email: this.state.email,
           password: this.state.password,
