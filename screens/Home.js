@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-// import { useFonts } from '@use-expo/font';
-import * as Fonts from "expo-font";
-import { AppLoading } from "expo";
-import { LinearGradient } from "expo-linear-gradient";
 
 import {
   StyleSheet,
@@ -70,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     color: "#FFF",
-    shadowOffset: { width: 0, height: 9 },
+    shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 1,
     shadowRadius: 20,
     elevation: 5,

@@ -7,6 +7,7 @@ import Register from "../screens/Signup";
 import EmailCheck from "../screens/EmailCheck";
 import ForgotPassword from "../screens/ForgotPassword";
 import OTP from "../screens/OTP";
+import ResetPassword from "../screens/ResetPassword";
 
 const screens = {
   Home: {
@@ -61,6 +62,17 @@ const screens = {
   },
   OTP: {
     screen: OTP,
+    navigationOptions: {
+      title: " ",
+      headerStyle: {
+        backgroundColor: "#fff",
+        shadowOpacity: 0,
+        elevation: 0,
+      },
+    },
+  },
+  ResetPassword: {
+    screen: ResetPassword,
     navigationOptions: {
       title: " ",
       headerStyle: {

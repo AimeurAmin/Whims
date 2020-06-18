@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputTextField from "../components/InputTextField";
 
 import {
@@ -14,21 +14,26 @@ const { width, height } = Dimensions.get("window");
 export default function ForgotPassword({ navigation }) {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.forgotPassword}>Forgot Password</Text>
+      <Text style={styles.forgotPassword}>Reset Password</Text>
       <Text style={styles.forgotPasswordText}>
-        Please enter your registered email or mobile to reset your password.
+        Please enter your new password and confirm the password.
       </Text>
 
       <InputTextField
         style={styles.inputText}
-        placeholderText="Email / Mobile Number"
+        placeholderText="New Password"
+        isSecure={false}
+      />
+      <InputTextField
+        style={styles.inputText}
+        placeholderText="Confirm Password"
         isSecure={false}
       />
       <TouchableOpacity
         style={styles.submitContainer}
         onPress={() => navigation.navigate("OTP")}
       >
-        <Text style={styles.recoverPassword}>Recover Password</Text>
+        <Text style={styles.recoverPassword}>Update</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -49,11 +54,13 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     alignItems: "center",
     justifyContent: "center",
+    color: "#FFF",
     shadowOffset: { width: 0, height: 9 },
     shadowOpacity: 1,
     shadowRadius: 20,
     elevation: 5,
-    marginBottom: height * 0.02,
+    marginTop: height * 0.05,
+    marginBottom: height * 0.05,
   },
   recoverPassword: {
     fontSize: 16,
@@ -69,10 +76,10 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Regular",
     fontSize: 16,
     color: "#ABB4BD",
-    marginVertical: height * 0.01,
+    marginVertical: height * 0.015,
   },
   inputText: {
     marginTop: height * 0.02,
-    marginBottom: height * 0.06,
+    marginBottom: height * 0.02,
   },
 });

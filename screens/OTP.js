@@ -12,7 +12,7 @@ import {
 
 const { width, height } = Dimensions.get("window");
 
-export default function Home({ navigation }) {
+export default function OTP({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.enterCode}>
@@ -26,7 +26,12 @@ export default function Home({ navigation }) {
         <InputTextField style={styles.inputText} isSecure={false} />
       </View>
 
-      <TouchableOpacity style={styles.submitContainer}>
+      <TouchableOpacity
+        style={styles.submitContainer}
+        onPress={() => {
+          navigation.navigate("ResetPassword");
+        }}
+      >
         <Text style={styles.verify}>Verify</Text>
       </TouchableOpacity>
       <Text style={styles.codeNotRecieved}>

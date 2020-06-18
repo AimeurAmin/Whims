@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginVertical: height * 0.02,
     textAlign: "right",
-    marginRight: width * 0.1,
   },
   loginButton: {
     width: width * 0.8,
@@ -94,10 +93,13 @@ const styles = StyleSheet.create({
     marginTop: width * 0.06,
     backgroundColor: "#5735CE",
     borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#fff",
+
     justifyContent: "center",
     alignSelf: "center",
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 5,
   },
   loginText: {
     color: "#fff",

@@ -109,12 +109,12 @@ export default class Signup extends Component {
           getData={this.getCPassword}
         />
         <TouchableOpacity
-          style={styles.loginButton}
+          style={styles.registerButton}
           onPress={() => {
             this.handleSubmit(this.state.name);
           }}
         >
-          <Text style={styles.loginText}>Register</Text>
+          <Text style={styles.registerText}>Register</Text>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -139,18 +139,20 @@ const styles = StyleSheet.create({
     marginTop: height * 0.01,
     marginBottom: height * 0.045,
   },
-  loginButton: {
+  registerButton: {
     width: width * 0.8,
     height: height * 0.07,
     marginTop: width * 0.06,
     backgroundColor: "#5735CE",
     borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#fff",
     justifyContent: "center",
     alignSelf: "center",
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 5,
   },
-  loginText: {
+  registerText: {
     color: "#fff",
     textAlign: "center",
     fontFamily: "Poppins-Bold",
