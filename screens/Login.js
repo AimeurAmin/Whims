@@ -31,12 +31,12 @@ const Login = ({ navigation }) => {
         placeholderText="Password"
         isSecure={true}
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
         <Text style={styles.forgotpassword}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.loginButton}
-        onPress={() => console.log("ok")}
+        onPress={() => navigation.navigate("Discover")}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
@@ -77,11 +77,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: height * 0.02,
   },
-  // inputText: {
-  //   width: width * 0.8,
-  //   marginHorizontal: width * 0.1,
-  //   marginVertical: height * 0.01,
-  // },
+  inputText: {
+    marginVertical: height * 0.01,
+  },
   forgotpassword: {
     fontFamily: "Poppins-Regular",
     color: "#5735CE",

@@ -14,42 +14,29 @@ import {
   ScrollView,
 } from "react-native";
 
-const getFont = () => {
-  return Fonts.loadAsync({
-    "Poppins-Regular": require("../assets/fonts/Poppins-ExtraBold.ttf"),
-  });
-};
-
 const { width, height } = Dimensions.get("window");
 
 export default function Home({ navigation }) {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  if (fontsLoaded) {
-    return (
-      <ScrollView style={styles.container}>
-        <View>
-          <Text style={styles.logoText}>WHIMS</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.submitContainer}
-          onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={styles.login}>Login</Text>
-        </TouchableOpacity>
+  return (
+    <ScrollView style={styles.container}>
+      <View>
+        <Text style={styles.logoText}>WHIMS</Text>
+      </View>
+      <TouchableOpacity
+        style={styles.submitContainer}
+        onPress={() => navigation.navigate("Login")}
+      >
+        <Text style={styles.login}>Login</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.submitContainerGrey}
-          onPress={() => navigation.navigate("Register")}
-        >
-          <Text style={styles.signup}>Signup</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    );
-  } else {
-    return (
-      <AppLoading startAsync={getFont} onFinish={() => setFontsLoaded(true)} />
-    );
-  }
+      <TouchableOpacity
+        style={styles.submitContainerGrey}
+        onPress={() => navigation.navigate("Register")}
+      >
+        <Text style={styles.signup}>Signup</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -62,12 +49,12 @@ const styles = StyleSheet.create({
   logoText: {
     alignSelf: "center",
     color: "#5735CE",
-    // fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Regular",
     fontSize: 48,
     marginVertical: height * 0.2,
   },
   text: {
-    // fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Regular",
     color: "#5735CE",
   },
   login: {

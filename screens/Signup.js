@@ -3,6 +3,7 @@ import axios from "axios";
 import { View, Text, StyleSheet, Dimensions, Alert } from "react-native";
 import InputTextField from "../components/InputTextField";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import { withNavigation } from "react-navigation";
 const { width, height } = Dimensions.get("window");
 
 export default class Signup extends Component {
@@ -42,9 +43,10 @@ export default class Signup extends Component {
       )
       .then((res) => {
         if (res.data.pool) {
-          alert(
-            "Thank you for registring to WHIMS \nPlease check your Email to verify your account."
-          );
+          // alert(
+          //   "Thank you for registring to WHIMS \nPlease check your Email to verify your account."
+          // );
+          this.props.navigation.navigate("EmailCheck");
         } else {
           if (res.data.code === "InvalidParameterException") {
             alert("Please Fill the required information");
@@ -108,9 +110,11 @@ export default class Signup extends Component {
         />
         <TouchableOpacity
           style={styles.loginButton}
-          onPress={() => this.handleSubmit(this.state.name)}
+          onPress={() => {
+            this.handleSubmit(this.state.name);
+          }}
         >
-          <Text style={styles.loginText}>Signup</Text>
+          <Text style={styles.loginText}>Register</Text>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -125,8 +129,7 @@ const styles = StyleSheet.create({
   },
   titleSignup: {
     fontSize: 23,
-    fontWeight: "bold",
-    fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Bold",
     marginLeft: width * 0.06,
     marginBottom: height * 0.05,
   },
@@ -150,8 +153,7 @@ const styles = StyleSheet.create({
   loginText: {
     color: "#fff",
     textAlign: "center",
-    fontFamily: "Poppins-Regular",
-    fontWeight: "bold",
+    fontFamily: "Poppins-Bold",
     fontSize: 16,
   },
 });
