@@ -99,6 +99,7 @@ export default class Signup extends Component {
           style={styles.inputText}
           placeholderText="Mobile Number"
           isSecure={false}
+          getData={this.getMobile}
         />
         <InputTextField
           style={styles.inputText}
