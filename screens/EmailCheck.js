@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-// import { useFonts } from '@use-expo/font';
-import * as Fonts from "expo-font";
-import { AppLoading } from "expo";
-import { LinearGradient } from "expo-linear-gradient";
+import { Linking } from 'react-native'
+
+
 
 import {
   StyleSheet,
@@ -29,7 +28,12 @@ export default function EmailCheck({ navigation }) {
         We have sent you a verification link on your email address.
       </Text>
 
-      <TouchableOpacity style={styles.submitContainer}>
+      <TouchableOpacity style={styles.submitContainer}
+        onPress= { _ => {
+          Linking.openURL('mailto:support@example.com')
+         
+        }}
+      >
         <Text style={styles.goToEmail}>Go to Email</Text>
       </TouchableOpacity>
     </ScrollView>

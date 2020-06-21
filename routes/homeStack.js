@@ -1,4 +1,5 @@
 import { createStackNavigator } from "react-navigation-stack";
+import React from "react";
 import { createAppContainer } from "react-navigation";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
@@ -8,6 +9,7 @@ import EmailCheck from "../screens/EmailCheck";
 import ForgotPassword from "../screens/ForgotPassword";
 import OTP from "../screens/OTP";
 import ResetPassword from "../screens/ResetPassword";
+import { TouchableOpacity, Button } from "react-native";
 
 const screens = {
   Home: {
@@ -33,7 +35,15 @@ const screens = {
   },
   Register: {
     screen: Register,
+
     navigationOptions: {
+      headerRight: (
+        <Button
+          onPress={() => alert("This is a button!")}
+          title="Info"
+          color="#fff"
+        />
+      ),
       title: " ",
       headerStyle: {
         backgroundColor: "#fff",

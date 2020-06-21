@@ -22,17 +22,17 @@ export default class Signup extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit = (name) => {
+  handleSubmit = () => {
     const data = {
       full_name: this.state.fullName,
       email: this.state.email,
       password: this.state.password,
-      confirm_password: this.state.confirmPassword,
+      confirm_password: this.state.confirm_password,
       mobile_number: this.state.mobile_number
     };
 
     // alert(this.state.email)
-
+    console.log(data)
     axios
       .post(
         baseUrl+"/signup",
@@ -46,9 +46,6 @@ export default class Signup extends Component {
       )
       .then((res) => {
         if (res.data.pool) {
-          // alert(
-          //   "Thank you for registring to WHIMS \nPlease check your Email to verify your account."
-          // );
           this.props.navigation.navigate("EmailCheck");
         } else {
           if (res.data.code === "InvalidParameterException") {
@@ -75,7 +72,7 @@ export default class Signup extends Component {
     this.setState({ password: _ });
   };
   getCPassword = (_) => {
-    this.setState({ confirmPassword: _ });
+    this.setState({ confirm_password: _ });
   };
   getMobile = _ => {
     this.setState({ mobile_number: _ });
@@ -118,7 +115,7 @@ export default class Signup extends Component {
         <TouchableOpacity
           style={styles.registerButton}
           onPress={() => {
-            this.handleSubmit(this.state.name);
+            this.handleSubmit();
           }}
         >
           <Text style={styles.registerText}>Register</Text>

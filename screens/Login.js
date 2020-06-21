@@ -7,91 +7,89 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  TextInput
 } from "react-native";
 import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
+import FloatingLabelInput from "../components/FloatingLabelInput";
+import Button from "../components/Button";
 
 const config = require('../appconfig.json')
 const baseUrl = config.baseUrl
 
 const { width, height } = Dimensions.get("window");
 
-const Login = ({ navigation }) => {
-  const [mail, setMail] = useState('')
-  const [password, setPassword] = useState('')
+export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: "",
+      password: "",
+    };
+  }
+  
 
-  const handleSubmit = _ => {
-    const data = {
-      mail: mail,
-      password: password
-    }
-    axios
-    .post(
-      baseUrl+"/login",
-      data,
-      {
-        headers: {
-          //    'api-token': 'xyz',
-          //other header fields
-        },
-      }
-    )
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  emailChangeHandler = _ => {
+    this.setState({user: _ });
   }
 
-  const getMail = _ => {
-    setMail(_)
+  passwordChangeHandler = _ => {
+    this.setState({password: _ });
   }
 
-  const getPassword = _ => {
-    setPassword(_)
-  }
+  render() {
+    
 
-  return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.logoText}>WHIMS</Text>
-      <View style={styles.socialMediaButtons}>
-        <SocialMediaButton socialM="Facebook" />
-        <SocialMediaButton socialM="Google" />
-      </View>
-      <Text style={styles.or}>or</Text>
-      <InputTextField
-        style={styles.inputText}
-        placeholderText="Email"
-        isSecure={false}
-        getData = {getMail}
-      />
-      <InputTextField
-        style={styles.inputText}
-        placeholderText="Password"
-        isSecure={true}
-        getData = {getPassword}
-      />
-      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-        <Text style={styles.forgotpassword}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => navigation.navigate("Discover")}
-      >
-        <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
-      <View style={styles.registerContainer}>
-        <Text style={styles.noAccount}>Don't have an account?</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Register", { name: "Register" })}
-        >
-          <Text style={styles.register}>Register Now</Text>
+    return (
+      <ScrollView style={styles.container}>
+        <Text style={styles.logoText}>WHIMS</Text>
+
+        <View style={styles.socialMediaButtons}>
+          <SocialMediaButton socialM="Facebook" />
+          <SocialMediaButton socialM="Google" />
+        </View>
+
+        <Text style={styles.or}>or</Text>
+        <InputTextField
+          style={styles.inputText}
+          placeholderText="Email"
+          isSecure={false}
+          getData = {this.emailChangeHandler}
+        />
+
+        <InputTextField
+          style={styles.inputText}
+          placeholderText="Password"
+          isSecure={true}
+          getData = {this.passwordChangeHandler}
+        />
+
+        <TouchableOpacity onPress={() => this.props.navigation.navigate("ForgotPassword")}>
+          <Text style={styles.forgotpassword}>Forgot Password?</Text>
         </TouchableOpacity>
-      </View>
-    </ScrollView>
-  );
-};
+
+        <Button
+          onPress={() => this.props.navigation.navigate("Discover", { name: "Discover" })}
+          ButtonTitle="Login"
+          ButtonEnabled={
+            this.state.user == "" || this.state.password == "" ? false : true
+          }
+        />
+        
+        <View style={styles.registerContainer}>
+          <Text style={styles.noAccount}>Don't have an account?</Text>
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate("Register", { name: "Register" })
+            }
+          >
+            <Text style={styles.register}>Register Now</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -134,7 +132,6 @@ const styles = StyleSheet.create({
     marginTop: width * 0.06,
     backgroundColor: "#5735CE",
     borderRadius: 4,
-
     justifyContent: "center",
     alignSelf: "center",
     shadowOffset: { width: 0, height: 9 },
@@ -167,5 +164,3 @@ const styles = StyleSheet.create({
     color: "#5735CE",
   },
 });
-
-export default Login;
