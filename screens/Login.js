@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios'
 import {
   View,
   Text,
@@ -12,6 +13,9 @@ import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
 import FloatingLabelInput from "../components/FloatingLabelInput";
 import Button from "../components/Button";
+
+const config = require('../appconfig.json')
+const baseUrl = config.baseUrl
 
 const { width, height } = Dimensions.get("window");
 
@@ -51,6 +55,7 @@ export default class Login extends React.Component {
         />
         <TouchableOpacity onPress={() => this.props.navigation.navigate("ForgotPassword")}>
           <Text style={styles.forgotpassword}>Forgot Password?</Text>
+
         </TouchableOpacity>
         {/* <TouchableOpacity
           style={styles.loginButton}
