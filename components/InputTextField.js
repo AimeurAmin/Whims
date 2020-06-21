@@ -10,8 +10,7 @@ const InputTextField = (props) => {
         placeholder={props.placeholderText}
         secureTextEntry={props.isSecure}
         style={styles.input}
-        onChangeText={props.onChangeText}
-        // onChangeText={(_) => props.getData(_)}
+        onChangeText={(_) => props.getData(_)}
       />
     </View>
   );

@@ -27,7 +27,19 @@ export default class Login extends React.Component {
       password: "",
     };
   }
+  
+
+  emailChangeHandler = _ => {
+    this.setState({user: _ });
+  }
+
+  passwordChangeHandler = _ => {
+    this.setState({password: _ });
+  }
+
   render() {
+    
+
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.logoText}>WHIMS</Text>
@@ -36,33 +48,26 @@ export default class Login extends React.Component {
           <SocialMediaButton socialM="Facebook" />
           <SocialMediaButton socialM="Google" />
         </View>
+
         <Text style={styles.or}>or</Text>
         <InputTextField
           style={styles.inputText}
           placeholderText="Email"
           isSecure={false}
-          onChangeText={(user) => {
-            this.setState({ user });
-            console.log("hey");
-          }}
+          getData = {this.emailChangeHandler}
         />
 
         <InputTextField
           style={styles.inputText}
           placeholderText="Password"
           isSecure={true}
-          onChangeText={(password) => this.setState({ password })}
+          getData = {this.passwordChangeHandler}
         />
+
         <TouchableOpacity onPress={() => this.props.navigation.navigate("ForgotPassword")}>
           <Text style={styles.forgotpassword}>Forgot Password?</Text>
-
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate("Discover")}
-        >
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity> */}
+
         <Button
           onPress={() => this.props.navigation.navigate("Discover", { name: "Discover" })}
           ButtonTitle="Login"
@@ -70,6 +75,7 @@ export default class Login extends React.Component {
             this.state.user == "" || this.state.password == "" ? false : true
           }
         />
+        
         <View style={styles.registerContainer}>
           <Text style={styles.noAccount}>Don't have an account?</Text>
           <TouchableOpacity
