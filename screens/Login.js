@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  TextInput,
+  TextInput
 } from "react-native";
 import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
@@ -49,7 +49,7 @@ export default class Login extends React.Component {
           isSecure={true}
           onChangeText={(password) => this.setState({ password })}
         />
-        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate("ForgotPassword")}>
           <Text style={styles.forgotpassword}>Forgot Password?</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity
@@ -59,7 +59,7 @@ export default class Login extends React.Component {
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity> */}
         <Button
-          onPress={() => navigation.navigate("Discover")}
+          onPress={() => this.props.navigation.navigate("Discover", { name: "Discover" })}
           ButtonTitle="Login"
           ButtonEnabled={
             this.state.user == "" || this.state.password == "" ? false : true
@@ -69,7 +69,7 @@ export default class Login extends React.Component {
           <Text style={styles.noAccount}>Don't have an account?</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("Register", { name: "Register" })
+              this.props.navigation.navigate("Register", { name: "Register" })
             }
           >
             <Text style={styles.register}>Register Now</Text>
