@@ -12,6 +12,7 @@ import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
 import FloatingLabelInput from "../components/FloatingLabelInput";
 import Button from "../components/Button";
+import { useNavigation } from "react-navigation";
 
 const { width, height } = Dimensions.get("window");
 
@@ -24,6 +25,7 @@ export default class Login extends React.Component {
     };
   }
   render() {
+    const { navigation } = this.props;
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.logoText}>WHIMS</Text>
@@ -52,12 +54,7 @@ export default class Login extends React.Component {
         <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
           <Text style={styles.forgotpassword}>Forgot Password?</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate("Discover")}
-        >
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity> */}
+
         <Button
           onPress={() => navigation.navigate("Discover")}
           ButtonTitle="Login"
