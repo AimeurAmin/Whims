@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   View,
   Text,
@@ -13,6 +14,9 @@ import SocialMediaButton from "../components/SocialMediaButton";
 import FloatingLabelInput from "../components/FloatingLabelInput";
 import Button from "../components/Button";
 import { useNavigation } from "react-navigation";
+
+const config = require("../appconfig.json");
+const baseUrl = config.baseUrl;
 
 const { width, height } = Dimensions.get("window");
 

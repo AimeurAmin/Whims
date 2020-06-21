@@ -5,42 +5,39 @@ import InputTextField from "../components/InputTextField";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { withNavigation } from "react-navigation";
 const { width, height } = Dimensions.get("window");
+const config = require("../appconfig.json");
+
+const baseUrl = config.baseUrl;
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      fullName: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      confirm_password: "",
+      mobile_number: "",
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit = (name) => {
     const data = {
+      full_name: this.state.fullName,
       email: this.state.email,
       password: this.state.password,
       confirm_password: this.state.confirmPassword,
+      mobile_number: this.state.mobile_number,
     };
 
-    // alert(this.state.email)
-
     axios
-      .post(
-        "https://gd1yvadkab.execute-api.us-east-2.amazonaws.com/latest/signup",
-        {
-          email: this.state.email,
-          password: this.state.password,
-          confirm_password: this.state.confirmPassword,
+      .post(baseUrl + "/signup", data, {
+        headers: {
+          //    'api-token': 'xyz',
+          //other header fields
         },
-        {
-          headers: {
-            //    'api-token': 'xyz',
-            //other header fields
-          },
-        }
-      )
+      })
       .then((res) => {
         if (res.data.pool) {
           // alert(
@@ -63,7 +60,7 @@ export default class Signup extends Component {
   };
 
   getName = (_) => {
-    this.setState({ name: _ });
+    this.setState({ fullName: _ });
   };
   getMail = (_) => {
     this.setState({ email: _ });
@@ -72,7 +69,10 @@ export default class Signup extends Component {
     this.setState({ password: _ });
   };
   getCPassword = (_) => {
-    this.setState({ confirmPassword: _ });
+    this.setState({ confirm_Password: _ });
+  };
+  getMobile = (_) => {
+    this.setState({ mobile_number: _ });
   };
 
   render() {
@@ -95,6 +95,7 @@ export default class Signup extends Component {
           style={styles.inputText}
           placeholderText="Mobile Number"
           isSecure={false}
+          getData={this.getMobile}
         />
         <InputTextField
           style={styles.inputText}
