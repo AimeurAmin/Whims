@@ -72,12 +72,12 @@ const Login = ({ navigation }) => {
         isSecure={true}
         getData = {getPassword}
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
         <Text style={styles.forgotpassword}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.loginButton}
-        onPress={() => handleSubmit()}
+        onPress={() => navigation.navigate("Discover")}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
@@ -118,18 +118,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: height * 0.02,
   },
-  // inputText: {
-  //   width: width * 0.8,
-  //   marginHorizontal: width * 0.1,
-  //   marginVertical: height * 0.01,
-  // },
+  inputText: {
+    marginVertical: height * 0.01,
+  },
   forgotpassword: {
     fontFamily: "Poppins-Regular",
     color: "#5735CE",
     fontSize: 14,
     marginVertical: height * 0.02,
     textAlign: "right",
-    marginRight: width * 0.1,
   },
   loginButton: {
     width: width * 0.8,
@@ -137,10 +134,13 @@ const styles = StyleSheet.create({
     marginTop: width * 0.06,
     backgroundColor: "#5735CE",
     borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#fff",
+
     justifyContent: "center",
     alignSelf: "center",
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 5,
   },
   loginText: {
     color: "#fff",
