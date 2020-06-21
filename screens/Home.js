@@ -10,6 +10,8 @@ import {
   ScrollView,
 } from "react-native";
 
+import Button from "../components/Button";
+
 const { width, height } = Dimensions.get("window");
 
 export default function Home({ navigation }) {
@@ -18,7 +20,9 @@ export default function Home({ navigation }) {
       <View>
         <Text style={styles.logoText}>WHIMS</Text>
       </View>
+
       <TouchableOpacity
+        // disabled={true}
         style={styles.submitContainer}
         onPress={() => navigation.navigate("Login")}
       >
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
   },
   submitContainerGrey: {
     fontSize: 16,
+    backgroundColor: "#fff",
     borderRadius: 4,
     paddingVertical: 12,
     marginTop: height * 0.04,
@@ -85,5 +90,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "#C5CCD6",
     borderWidth: 0.5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 2,
+    marginBottom: height * 0.2,
   },
 });

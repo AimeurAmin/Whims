@@ -6,51 +6,79 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from "react-native";
 import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
+import FloatingLabelInput from "../components/FloatingLabelInput";
+import Button from "../components/Button";
 
 const { width, height } = Dimensions.get("window");
 
-const Login = ({ navigation }) => {
-  return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.logoText}>WHIMS</Text>
-      <View style={styles.socialMediaButtons}>
-        <SocialMediaButton socialM="Facebook" />
-        <SocialMediaButton socialM="Google" />
-      </View>
-      <Text style={styles.or}>or</Text>
-      <InputTextField
-        style={styles.inputText}
-        placeholderText="Email"
-        isSecure={false}
-      />
-      <InputTextField
-        style={styles.inputText}
-        placeholderText="Password"
-        isSecure={true}
-      />
-      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-        <Text style={styles.forgotpassword}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => navigation.navigate("Discover")}
-      >
-        <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
-      <View style={styles.registerContainer}>
-        <Text style={styles.noAccount}>Don't have an account?</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Register", { name: "Register" })}
-        >
-          <Text style={styles.register}>Register Now</Text>
+export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: "",
+      password: "",
+    };
+  }
+  render() {
+    return (
+      <ScrollView style={styles.container}>
+        <Text style={styles.logoText}>WHIMS</Text>
+
+        <View style={styles.socialMediaButtons}>
+          <SocialMediaButton socialM="Facebook" />
+          <SocialMediaButton socialM="Google" />
+        </View>
+        <Text style={styles.or}>or</Text>
+        <InputTextField
+          style={styles.inputText}
+          placeholderText="Email"
+          isSecure={false}
+          onChangeText={(user) => {
+            this.setState({ user });
+            console.log("hey");
+          }}
+        />
+
+        <InputTextField
+          style={styles.inputText}
+          placeholderText="Password"
+          isSecure={true}
+          onChangeText={(password) => this.setState({ password })}
+        />
+        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+          <Text style={styles.forgotpassword}>Forgot Password?</Text>
         </TouchableOpacity>
-      </View>
-    </ScrollView>
-  );
-};
+        {/* <TouchableOpacity
+          style={styles.loginButton}
+          onPress={() => navigation.navigate("Discover")}
+        >
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity> */}
+        <Button
+          onPress={() => navigation.navigate("Discover")}
+          ButtonTitle="Login"
+          ButtonEnabled={
+            this.state.user == "" || this.state.password == "" ? false : true
+          }
+        />
+        <View style={styles.registerContainer}>
+          <Text style={styles.noAccount}>Don't have an account?</Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Register", { name: "Register" })
+            }
+          >
+            <Text style={styles.register}>Register Now</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -93,7 +121,6 @@ const styles = StyleSheet.create({
     marginTop: width * 0.06,
     backgroundColor: "#5735CE",
     borderRadius: 4,
-
     justifyContent: "center",
     alignSelf: "center",
     shadowOffset: { width: 0, height: 9 },
@@ -126,5 +153,3 @@ const styles = StyleSheet.create({
     color: "#5735CE",
   },
 });
-
-export default Login;
