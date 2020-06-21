@@ -7,13 +7,10 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  TextInput,
 } from "react-native";
 import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
-import FloatingLabelInput from "../components/FloatingLabelInput";
 import Button from "../components/Button";
-import { useNavigation } from "react-navigation";
 
 const config = require("../appconfig.json");
 const baseUrl = config.baseUrl;
@@ -24,12 +21,46 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "",
+      email: "",
       password: "",
+      emailHasError: false,
+      passwordHasError: false,
+      passwordHasError: false,
     };
   }
+
+  emailChangeHandler = (_) => {
+    this.setState({ email: _ });
+    const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    if (expression.test(String(this.state.email).toLowerCase())) {
+      this.setState({
+        emailHasError: !expression.test(String(this.state.email).toLowerCase()),
+      });
+    } else {
+      setTimeout(
+        () =>
+          this.setState({
+            emailHasError: !expression.test(
+              String(this.state.email).toLowerCase()
+            ),
+          }),
+        2000
+      );
+    }
+  };
+
+  passwordChangeHandler = (_) => {
+    this.setState({ password: _ });
+  };
+
+  emailVerification = () => {
+    const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    this.setState({
+      emailHasError: !expression.test(String(this.state.email).toLowerCase()),
+    });
+  };
+
   render() {
-    const { navigation } = this.props;
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.logoText}>WHIMS</Text>
@@ -38,39 +69,50 @@ export default class Login extends React.Component {
           <SocialMediaButton socialM="Facebook" />
           <SocialMediaButton socialM="Google" />
         </View>
+
         <Text style={styles.or}>or</Text>
         <InputTextField
-          style={styles.inputText}
           placeholderText="Email"
           isSecure={false}
-          onChangeText={(user) => {
-            this.setState({ user });
-            console.log("hey");
-          }}
+          getData={this.emailChangeHandler}
+          // onBlur={this.emailVerification}
+          hasErrors={this.state.emailHasError}
+          errorMessage="email Invalid"
         />
 
         <InputTextField
-          style={styles.inputText}
           placeholderText="Password"
           isSecure={true}
-          onChangeText={(password) => this.setState({ password })}
+          getData={this.passwordChangeHandler}
+          hasErrors={this.state.passwordHasError}
+          errorMessage="Password invalid"
         />
-        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("ForgotPassword")}
+        >
           <Text style={styles.forgotpassword}>Forgot Password?</Text>
         </TouchableOpacity>
 
         <Button
-          onPress={() => navigation.navigate("Discover")}
+          onPress={() => {
+            if (!this.state.emailHasError || !this.state.passwordHasError) {
+              this.props.navigation.navigate("Discover", {
+                name: "Discover",
+              });
+            }
+          }}
           ButtonTitle="Login"
           ButtonEnabled={
-            this.state.user == "" || this.state.password == "" ? false : true
+            this.state.email == "" || this.state.password == "" ? false : true
           }
         />
+
         <View style={styles.registerContainer}>
           <Text style={styles.noAccount}>Don't have an account?</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("Register", { name: "Register" })
+              this.props.navigation.navigate("Register", { name: "Register" })
             }
           >
             <Text style={styles.register}>Register Now</Text>
@@ -106,9 +148,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: height * 0.02,
   },
-  inputText: {
-    marginVertical: height * 0.01,
-  },
+
   forgotpassword: {
     fontFamily: "Poppins-Regular",
     color: "#5735CE",
@@ -139,7 +179,7 @@ const styles = StyleSheet.create({
   registerContainer: {
     flexDirection: "row",
     alignSelf: "center",
-    marginVertical: width * 0.07,
+    // marginVertical: width * 0.07,
   },
   noAccount: {
     marginHorizontal: width * 0.005,

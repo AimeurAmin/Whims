@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TextInput, Dimensions, StyleSheet } from "react-native";
+import { HelperText } from "react-native-paper";
 
 const { width, height } = Dimensions.get("window");
 
@@ -10,11 +11,13 @@ const InputTextField = (props) => {
         placeholder={props.placeholderText}
         secureTextEntry={props.isSecure}
         style={styles.input}
-        onChangeText={(_) => {
-          props.getData(_);
-          props.onChangeText;
-        }}
+        onChange={props.onBlur}
+        // onBlur={props.onBlur}
+        onChangeText={(_) => props.getData(_)}
       />
+      <HelperText type="error" visible={props.hasErrors}>
+        {props.errorMessage}
+      </HelperText>
     </View>
   );
 };
