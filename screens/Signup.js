@@ -12,18 +12,22 @@ export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      fullName: "",
       email: "",
       password: "",
-      confirmPassword: "",
-    };
+      confirm_password: "",
+      mobile_number: "",
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit = (name) => {
     const data = {
+      full_name: this.state.fullName,
       email: this.state.email,
       password: this.state.password,
       confirm_password: this.state.confirmPassword,
+      mobile_number: this.state.mobile_number
     };
 
     // alert(this.state.email)
@@ -31,11 +35,7 @@ export default class Signup extends Component {
     axios
       .post(
         baseUrl+"/signup",
-        {
-          email: this.state.email,
-          password: this.state.password,
-          confirm_password: this.state.confirmPassword,
-        },
+        data,
         {
           headers: {
             //    'api-token': 'xyz',
@@ -64,7 +64,7 @@ export default class Signup extends Component {
   };
 
   getName = (_) => {
-    this.setState({ name: _ });
+    this.setState({ fullName: _ });
   };
   getMail = (_) => {
     this.setState({ email: _ });
@@ -76,7 +76,7 @@ export default class Signup extends Component {
     this.setState({ confirmPassword: _ });
   };
   getMobile = _ => {
-    console.log( _ )
+    this.setState({ mobile_number: _ });
   }
 
   render() {
