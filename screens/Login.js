@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios'
 import {
   View,
   Text,
@@ -10,9 +11,47 @@ import {
 import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
 
+const config = require('../appconfig.json')
+const baseUrl = config.baseUrl
+
 const { width, height } = Dimensions.get("window");
 
 const Login = ({ navigation }) => {
+  const [mail, setMail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = _ => {
+    const data = {
+      mail: mail,
+      password: password
+    }
+    axios
+    .post(
+      baseUrl+"/login",
+      data,
+      {
+        headers: {
+          //    'api-token': 'xyz',
+          //other header fields
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  const getMail = _ => {
+    setMail(_)
+  }
+
+  const getPassword = _ => {
+    setPassword(_)
+  }
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.logoText}>WHIMS</Text>
@@ -25,11 +64,13 @@ const Login = ({ navigation }) => {
         style={styles.inputText}
         placeholderText="Email"
         isSecure={false}
+        getData = {getMail}
       />
       <InputTextField
         style={styles.inputText}
         placeholderText="Password"
         isSecure={true}
+        getData = {getPassword}
       />
       <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
         <Text style={styles.forgotpassword}>Forgot Password?</Text>
