@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   StyleSheet,
   Text,
@@ -9,8 +8,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-
-import Button from "../components/Button";
 
 const { width, height } = Dimensions.get("window");
 
@@ -22,7 +19,6 @@ export default function Home({ navigation }) {
       </View>
 
       <TouchableOpacity
-        // disabled={true}
         style={styles.submitContainer}
         onPress={() => navigation.navigate("Login")}
       >
