@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { View, Text, StyleSheet, Dimensions, Alert } from "react-native";
 import InputTextField from "../components/InputTextField";
-import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import Button from "../components/Button";
-import { withNavigation } from "react-navigation";
 const { width, height } = Dimensions.get("window");
 const config = require("../appconfig.json");
 

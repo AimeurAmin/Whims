@@ -28,6 +28,14 @@ export default class Login extends React.Component {
       passwordHasError: false,
     };
   }
+  go = () => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(this.state.email) === true) {
+      alert("valid");
+    } else {
+      alert();
+    }
+  };
 
   emailChangeHandler = (_) => {
     this.setState({ email: _ });
