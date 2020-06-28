@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import axios from 'axios'
+import React, { useState } from "react";
+import axios from "axios";
 import {
   View,
   Text,
@@ -7,15 +7,13 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  TextInput
 } from "react-native";
 import InputTextField from "../components/InputTextField";
 import SocialMediaButton from "../components/SocialMediaButton";
-import FloatingLabelInput from "../components/FloatingLabelInput";
 import Button from "../components/Button";
 
-const config = require('../appconfig.json')
-const baseUrl = config.baseUrl
+const config = require("../appconfig.json");
+const baseUrl = config.baseUrl;
 
 const { width, height } = Dimensions.get("window");
 
@@ -23,23 +21,47 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "",
+      email: "",
       password: "",
+      emailHasError: false,
+      passwordHasError: false,
+      passwordHasError: false,
     };
   }
-  
+  go = () => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(this.state.email) === true) {
+      alert("valid");
+    } else {
+      alert();
+    }
+  };
 
-  emailChangeHandler = _ => {
-    this.setState({user: _ });
-  }
+  emailChangeHandler = (_) => {
+    this.setState({ email: _ });
+    const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    if (expression.test(String(this.state.email).toLowerCase())) {
+      this.setState({
+        emailHasError: !expression.test(String(this.state.email).toLowerCase()),
+      });
+    } else {
+      setTimeout(
+        () =>
+          this.setState({
+            emailHasError: !expression.test(
+              String(this.state.email).toLowerCase()
+            ),
+          }),
+        2000
+      );
+    }
+  };
 
-  passwordChangeHandler = _ => {
-    this.setState({password: _ });
-  }
+  passwordChangeHandler = (_) => {
+    this.setState({ password: _ });
+  };
 
   render() {
-    
-
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.logoText}>WHIMS</Text>
@@ -51,31 +73,41 @@ export default class Login extends React.Component {
 
         <Text style={styles.or}>or</Text>
         <InputTextField
-          style={styles.inputText}
           placeholderText="Email"
           isSecure={false}
-          getData = {this.emailChangeHandler}
+          getData={this.emailChangeHandler}
+          hasErrors={this.state.emailHasError}
+          errorMessage="email Invalid"
         />
 
         <InputTextField
-          style={styles.inputText}
           placeholderText="Password"
           isSecure={true}
-          getData = {this.passwordChangeHandler}
+          getData={this.passwordChangeHandler}
+          hasErrors={this.state.passwordHasError}
+          errorMessage="Password invalid"
         />
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate("ForgotPassword")}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("ForgotPassword")}
+        >
           <Text style={styles.forgotpassword}>Forgot Password?</Text>
         </TouchableOpacity>
 
         <Button
-          onPress={() => this.props.navigation.navigate("Discover", { name: "Discover" })}
+          onPress={() => {
+            if (!this.state.emailHasError || !this.state.passwordHasError) {
+              this.props.navigation.navigate("Discover", {
+                name: "Discover",
+              });
+            }
+          }}
           ButtonTitle="Login"
           ButtonEnabled={
-            this.state.user == "" || this.state.password == "" ? false : true
+            this.state.email == "" || this.state.password == "" ? false : true
           }
         />
-        
+
         <View style={styles.registerContainer}>
           <Text style={styles.noAccount}>Don't have an account?</Text>
           <TouchableOpacity
@@ -116,9 +148,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: height * 0.02,
   },
-  inputText: {
-    marginVertical: height * 0.01,
-  },
+
   forgotpassword: {
     fontFamily: "Poppins-Regular",
     color: "#5735CE",
@@ -126,30 +156,10 @@ const styles = StyleSheet.create({
     marginVertical: height * 0.02,
     textAlign: "right",
   },
-  loginButton: {
-    width: width * 0.8,
-    height: height * 0.07,
-    marginTop: width * 0.06,
-    backgroundColor: "#5735CE",
-    borderRadius: 4,
-    justifyContent: "center",
-    alignSelf: "center",
-    shadowOffset: { width: 0, height: 9 },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 5,
-  },
-  loginText: {
-    color: "#fff",
-    textAlign: "center",
-    fontFamily: "Poppins-Regular",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
+
   registerContainer: {
     flexDirection: "row",
     alignSelf: "center",
-    marginVertical: width * 0.07,
   },
   noAccount: {
     marginHorizontal: width * 0.005,

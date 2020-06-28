@@ -37,13 +37,6 @@ const screens = {
     screen: Register,
 
     navigationOptions: {
-      headerRight: (
-        <Button
-          onPress={() => alert("This is a button!")}
-          title="Info"
-          color="#fff"
-        />
-      ),
       title: " ",
       headerStyle: {
         backgroundColor: "#fff",
