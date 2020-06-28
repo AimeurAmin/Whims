@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { View, Text, StyleSheet, Dimensions, Alert } from "react-native";
 import InputTextField from "../components/InputTextField";
-import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import { withNavigation } from "react-navigation";
+import { ScrollView } from "react-native-gesture-handler";
+import Button from "../components/Button";
 const { width, height } = Dimensions.get("window");
-const config = require ('../appconfig.json')
+const config = require("../appconfig.json");
 
-const baseUrl = config.baseUrl
+const baseUrl = config.baseUrl;
 
 export default class Signup extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class Signup extends Component {
       password: "",
       confirm_password: "",
       mobile_number: "",
-    }
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -28,22 +28,17 @@ export default class Signup extends Component {
       email: this.state.email,
       password: this.state.password,
       confirm_password: this.state.confirm_password,
-      mobile_number: this.state.mobile_number
+      mobile_number: this.state.mobile_number,
     };
 
-    // alert(this.state.email)
-    console.log(data)
+    console.log(data);
     axios
-      .post(
-        baseUrl+"/signup",
-        data,
-        {
-          headers: {
-            //    'api-token': 'xyz',
-            //other header fields
-          },
-        }
-      )
+      .post(baseUrl + "/signup", data, {
+        headers: {
+          //    'api-token': 'xyz',
+          //other header fields
+        },
+      })
       .then((res) => {
         if (res.data.pool) {
           this.props.navigation.navigate("EmailCheck");
@@ -74,9 +69,9 @@ export default class Signup extends Component {
   getCPassword = (_) => {
     this.setState({ confirm_password: _ });
   };
-  getMobile = _ => {
+  getMobile = (_) => {
     this.setState({ mobile_number: _ });
-  }
+  };
 
   render() {
     return (
@@ -112,14 +107,24 @@ export default class Signup extends Component {
           isSecure={true}
           getData={this.getCPassword}
         />
-        <TouchableOpacity
-          style={styles.registerButton}
+
+        <Button
           onPress={() => {
-            this.handleSubmit();
+            if (!this.state.emailHasError || !this.state.passwordHasError) {
+              this.handleSubmit();
+            }
           }}
-        >
-          <Text style={styles.registerText}>Register</Text>
-        </TouchableOpacity>
+          ButtonTitle="Register"
+          ButtonEnabled={
+            this.state.fullName == "" ||
+            this.state.email == "" ||
+            this.state.mobile_number == "" ||
+            this.state.password == "" ||
+            this.state.confirm_password == ""
+              ? false
+              : true
+          }
+        />
       </ScrollView>
     );
   }
@@ -141,7 +146,7 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     marginHorizontal: width * 0.05,
     marginTop: height * 0.01,
-    marginBottom: height * 0.045,
+    //  marginBottom: height * 0.045,
   },
   registerButton: {
     width: width * 0.8,
@@ -155,11 +160,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 20,
     elevation: 5,
-  },
-  registerText: {
-    color: "#fff",
-    textAlign: "center",
-    fontFamily: "Poppins-Bold",
-    fontSize: 16,
   },
 });

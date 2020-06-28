@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -9,7 +8,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-
 import Button from "../components/Button";
 
 const { width, height } = Dimensions.get("window");
@@ -21,13 +19,11 @@ export default function Home({ navigation }) {
         <Text style={styles.logoText}>WHIMS</Text>
       </View>
 
-      <TouchableOpacity
-        // disabled={true}
-        style={styles.submitContainer}
+      <Button
         onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={styles.login}>Login</Text>
-      </TouchableOpacity>
+        ButtonTitle="Login"
+        ButtonEnabled={true}
+      ></Button>
 
       <TouchableOpacity
         style={styles.submitContainerGrey}
@@ -49,35 +45,15 @@ const styles = StyleSheet.create({
   logoText: {
     alignSelf: "center",
     color: "#5735CE",
-    fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Bold",
     fontSize: 48,
     marginVertical: height * 0.2,
   },
-  text: {
-    fontFamily: "Poppins-Regular",
-    color: "#5735CE",
-  },
-  login: {
-    color: "#FFF",
-    fontWeight: "600",
-    fontSize: 16,
-  },
-  submitContainer: {
-    backgroundColor: "#5735CE",
-    fontSize: 16,
-    borderRadius: 4,
-    paddingVertical: 12,
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#FFF",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 5,
-  },
+
   signup: {
     fontWeight: "600",
     fontSize: 16,
+    fontFamily: "Poppins-Bold",
     color: "#323643",
   },
   submitContainerGrey: {
@@ -85,7 +61,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 4,
     paddingVertical: 12,
-    marginTop: height * 0.04,
     alignItems: "center",
     justifyContent: "center",
     borderColor: "#C5CCD6",
