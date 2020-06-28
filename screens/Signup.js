@@ -14,7 +14,10 @@ export default class Signup extends Component {
     super(props);
     this.state = {
       fullName: "",
+      usernameError: "",
+      nameHasError: "",
       email: "",
+      emailHasError: "",
       password: "",
       confirm_password: "",
       mobile_number: "",
@@ -59,9 +62,31 @@ export default class Signup extends Component {
 
   getName = (_) => {
     this.setState({ fullName: _ });
+    if (this.state.fullName.length < 5) {
+      // isError = true;
+      this.nameHasError = true;
+      this.setState.usernameError =
+        "Username needs to be atleast 5 characters long";
+    }
   };
   getMail = (_) => {
     this.setState({ email: _ });
+    const expression = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (expression.test(String(this.state.email).toLowerCase())) {
+      this.setState({
+        emailHasError: !expression.test(String(this.state.email).toLowerCase()),
+      });
+    } else {
+      setTimeout(
+        () =>
+          this.setState({
+            emailHasError: !expression.test(
+              String(this.state.email).toLowerCase()
+            ),
+          }),
+        2000
+      );
+    }
   };
   getPassword = (_) => {
     this.setState({ password: _ });
@@ -82,12 +107,16 @@ export default class Signup extends Component {
           placeholderText="Full Name"
           isSecure={false}
           getData={this.getName}
+          hasErrors={this.state.nameHasError}
+          errorMessage={this.state.usernameError}
         />
         <InputTextField
           style={styles.inputText}
           placeholderText="Email"
           isSecure={false}
           getData={this.getMail}
+          hasErrors={this.state.emailHasError}
+          errorMessage="email Invalid"
         />
         <InputTextField
           style={styles.inputText}

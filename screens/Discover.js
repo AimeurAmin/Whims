@@ -8,15 +8,50 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  FlatList,
+  SafeAreaView,
+  Platform,
 } from "react-native";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
 
 const { width, height } = Dimensions.get("window");
+const Items = [
+  {
+    key: "1",
+    itemName: "White top",
+    itemCategory: "Women",
+  },
+  {
+    key: "2",
+    itemName: "Red dress",
+    itemCategory: "Women",
+  },
+  {
+    key: "3",
+    itemName: "Cool hat",
+    itemCategory: "Women",
+  },
+  {
+    key: "4",
+    itemName: "Blue jeans",
+    itemCategory: "Women",
+  },
+  {
+    key: "5",
+    itemName: "Blue jeans",
+    itemCategory: "Women",
+  },
+  {
+    key: "6",
+    itemName: "Blue jeans",
+    itemCategory: "Women",
+  },
+];
 
 export default function Discover({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.titleBar}>
         <View>
           <Image
@@ -38,13 +73,23 @@ export default function Discover({ navigation }) {
         <Text style={styles.category}>Women</Text>
         <Text style={styles.category}>Best sellers</Text>
       </View>
-      <ScrollView style={styles.catalog}>
-        <Card itemName="Woman Dress" itemCategory="Women"></Card>
-      </ScrollView>
+      <View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          style={styles.catalog}
+          data={Items}
+          numColumns={2}
+          keyExtractor={(item) => item.key}
+          renderItem={({ item }) => (
+            <Card itemName={item.itemName} itemCategory={item.itemCategory} />
+          )}
+        />
+      </View>
+
       <View>
         <Text>Filters</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -53,12 +98,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: width * 0.05,
-    paddingVertical: height * 0.1,
+    paddingTop: Platform.OS === "android" ? height * 0.06 : 0,
+
+    // paddingTop: height * 0.1,
+    // justifyContent: "space-between",
   },
   titleBar: {
     width: "100%",
     height: height * 0.07,
-    flex: 1,
+    marginBottom: height * 0.02,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -74,13 +122,14 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   categoriesBar: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: height * 0.02,
+    height: height * 0.07,
   },
-  category: {
-    fontFamily: "Poppins-Regular",
+
+  catalog: {
+    height: height * 0.7,
+    // flexGrow: 10,
+    // justifyContent: "space-between",
   },
-  catalog: {},
 });

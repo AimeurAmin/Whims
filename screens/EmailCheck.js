@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Linking } from 'react-native'
-
-
+import { Linking } from "react-native";
 
 import {
   StyleSheet,
@@ -28,10 +26,10 @@ export default function EmailCheck({ navigation }) {
         We have sent you a verification link on your email address.
       </Text>
 
-      <TouchableOpacity style={styles.submitContainer}
-        onPress= { _ => {
-          Linking.openURL('mailto:support@example.com')
-         
+      <TouchableOpacity
+        style={styles.submitContainer}
+        onPress={(_) => {
+          Linking.openURL("mailto:support@example.com");
         }}
       >
         <Text style={styles.goToEmail}>Go to Email</Text>
