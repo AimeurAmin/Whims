@@ -9,7 +9,7 @@ import EmailCheck from "../screens/EmailCheck";
 import ForgotPassword from "../screens/ForgotPassword";
 import OTP from "../screens/OTP";
 import ResetPassword from "../screens/ResetPassword";
-import { TouchableOpacity, Button } from "react-native";
+import TabNavigator from "./tabNavigator";
 
 const screens = {
   Home: {
@@ -27,7 +27,7 @@ const screens = {
     },
   },
   Discover: {
-    screen: Discover,
+    screen: TabNavigator,
     navigationOptions: {
       title: "Discover Page",
       headerShown: false,

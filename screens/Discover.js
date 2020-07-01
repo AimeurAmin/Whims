@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
+import TabNavigator from "../routes/tabNavigator";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
 
