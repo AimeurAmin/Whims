@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -7,7 +6,6 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   SafeAreaView,
   Platform,
@@ -86,8 +84,11 @@ export default function Discover({ navigation }) {
         />
       </View>
 
-      <View>
-        <Text>Filters</Text>
+      <View style={styles.filtersSection}>
+        <Text>No filters applied</Text>
+        <TouchableOpacity style={styles.filterButton}>
+          <Text style={styles.filerButtonText}>filter</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -99,9 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: width * 0.05,
     paddingTop: Platform.OS === "android" ? height * 0.06 : 0,
-
-    // paddingTop: height * 0.1,
-    // justifyContent: "space-between",
   },
   titleBar: {
     width: "100%",
@@ -119,7 +117,6 @@ const styles = StyleSheet.create({
   },
   menuLogo: {
     marginTop: height * 0.02,
-    // backgroundColor: "red",
   },
   categoriesBar: {
     flexDirection: "row",
@@ -129,7 +126,24 @@ const styles = StyleSheet.create({
 
   catalog: {
     height: height * 0.7,
-    // flexGrow: 10,
-    // justifyContent: "space-between",
+  },
+
+  filtersSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: height * 0.01,
+  },
+
+  filterButton: {
+    backgroundColor: "#5735CE",
+    borderRadius: 50,
+    width: 120,
+    paddingVertical: 10,
+  },
+  filerButtonText: {
+    fontFamily: "Poppins-Bold",
+    textTransform: "uppercase",
+    color: "#fff",
+    alignSelf: "center",
   },
 });
