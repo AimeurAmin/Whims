@@ -1,31 +1,97 @@
 import React from "react";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
+import Discover from "../screens/Discover";
+import Cart from "../screens/Cart";
+import Profile from "../screens/Profile";
+import Settings from "../screens/Settings";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import Discover from "../screens/Discover";
-
-const activeColor = "#4775f2";
+const activeColor = "#5735CE";
 const inactiveColor = "#b8bece";
 
-const DiscoverStack = createStackNavigator({
-  Discover: {
-    screen: Discover,
+const HomeStack = createStackNavigator(
+  {
+    Home: {
+      screen: Discover,
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
+  },
+  {
+    mode: "modal",
+  }
+);
+
+HomeStack.navigationOptions = ({ navigation }) => {
+  var tabBarVisible = true;
+  const routeName = navigation.state.routes[navigation.state.index].routeName;
+
+  if (routeName == "Section") {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: " ",
+    tabBarIcon: ({ focused }) => (
+      <Ionicons
+        name="ios-home"
+        size={26}
+        color={focused ? activeColor : inactiveColor}
+      />
+    ),
+  };
+};
+
+const CartStack = createStackNavigator({
+  Cart: Cart,
+});
+
+CartStack.navigationOptions = {
+  tabBarLabel: " ",
+
+  tabBarIcon: ({ focused }) => (
+    <Ionicons
+      name="ios-cart"
+      size={26}
+      color={focused ? activeColor : inactiveColor}
+    />
+  ),
+};
+
+const ProfileStack = createStackNavigator({
+  Profile: Profile,
+});
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: " ",
+  tabBarIcon: ({ focused }) => (
+    <Ionicons
+      name="ios-person"
+      size={26}
+      color={focused ? activeColor : inactiveColor}
+    />
+  ),
+};
+
+const SettingsStack = createStackNavigator({
+  Settings: {
+    screen: Settings,
     navigationOptions: {
-      title: " ",
       headerShown: false,
-      tabBarLabel: " ",
     },
   },
 });
 
-DiscoverStack.navigationOptions = {
+SettingsStack.navigationOptions = {
   tabBarLabel: " ",
   tabBarIcon: ({ focused }) => (
     <Ionicons
-      name="ios-home"
+      name="ios-settings"
       size={26}
       color={focused ? activeColor : inactiveColor}
     />
@@ -33,7 +99,10 @@ DiscoverStack.navigationOptions = {
 };
 
 const TabNavigator = createBottomTabNavigator({
-  DiscoverStack,
+  HomeStack,
+  CartStack,
+  ProfileStack,
+  SettingsStack,
 });
 
 export default createAppContainer(TabNavigator);

@@ -12,9 +12,8 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import TabNavigator from "../routes/tabNavigator";
+
 import Card from "../components/Card";
-import Logo from "../components/Logo";
 
 const { width, height } = Dimensions.get("window");
 const Items = [
