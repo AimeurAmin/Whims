@@ -64,7 +64,12 @@ CartStack.navigationOptions = {
 };
 
 const ProfileStack = createStackNavigator({
-  Profile: Profile,
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
 });
 
 ProfileStack.navigationOptions = {
