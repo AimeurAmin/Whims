@@ -8,6 +8,7 @@ import {
   TouchableNativeFeedbackComponent,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Icon from "../components/Icon";
 
 const { width, height } = Dimensions.get("window");
 
@@ -16,7 +17,13 @@ const ListItem = (props) => {
     <View style={styles.container}>
       <View style={styles.itemContainer}>
         <View style={styles.iconContainer}>
-          <Image style={styles.listItemIcon} source={props.icon}></Image>
+          {/* <Image style={styles.listItemIcon} source={props.icon}></Image> */}
+          <Icon
+            style={styles.listItemIcon}
+            name={props.icon}
+            size={20}
+            color="rgba(87, 53, 206, 0.24)"
+          />
         </View>
 
         <Text style={styles.itemName}>{props.itemName}</Text>
@@ -39,8 +46,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 40,
     height: 40,
-    backgroundColor: "#5735CE",
-    opacity: 0.2,
+    backgroundColor: "rgba(87, 53, 206, 0.24)",
     justifyContent: "center",
   },
   itemContainer: {
@@ -51,10 +57,8 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   listItemIcon: {
-    height: 20,
-    width: 20,
     alignSelf: "center",
-    zIndex: 9,
+    opacity: 1,
   },
 });
 

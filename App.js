@@ -9,6 +9,7 @@ const getFont = () => {
     "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Italic": require("./assets/fonts/Poppins-Italic.ttf"),
     "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+    "custom-icons": require("./assets/fonts/icomoon.ttf"),
   });
 };
 

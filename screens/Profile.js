@@ -18,42 +18,42 @@ const Items = [
   {
     key: "1",
     itemName: "Edit Profile",
-    itemIcon: require("../assets/icons/edit-icon.png"),
+    itemIcon: "edit-icon",
   },
   {
     key: "2",
     itemName: "Shipping Adress",
-    itemIcon: require("../assets/icons/location-icon.png"),
+    itemIcon: "location-icon",
   },
   {
     key: "3",
     itemName: "Wishlist",
-    itemIcon: require("../assets/icons/heart-icon.png"),
+    itemIcon: "heart-icon",
   },
   {
     key: "4",
     itemName: "Order History",
-    itemIcon: require("../assets/icons/history-icon.png"),
+    itemIcon: "history-icon",
   },
   {
     key: "5",
     itemName: "Track Order",
-    itemIcon: require("../assets/icons/track-order-icon.png"),
+    itemIcon: "track-order-icon",
   },
   {
     key: "6",
     itemName: "Cards",
-    itemIcon: require("../assets/icons/cards-icon.png"),
+    itemIcon: "cards-icon",
   },
   {
     key: "7",
     itemName: "Notifications",
-    itemIcon: require("../assets/icons/notification-icon.png"),
+    itemIcon: "notification-icon",
   },
   {
     key: "8",
     itemName: "Log Out",
-    itemIcon: require("../assets/icons/exit-icon.png"),
+    itemIcon: "exit-icon",
   },
 ];
 
@@ -125,6 +125,8 @@ const styles = StyleSheet.create({
   },
   menuLogo: {
     marginTop: height * 0.02,
+    width: 30,
+    height: 20,
   },
   accountHeader: {
     flexDirection: "row",

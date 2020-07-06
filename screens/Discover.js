@@ -117,6 +117,8 @@ const styles = StyleSheet.create({
   },
   menuLogo: {
     marginTop: height * 0.02,
+    width: 30,
+    height: 20,
   },
   categoriesBar: {
     flexDirection: "row",
