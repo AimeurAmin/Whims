@@ -4,6 +4,7 @@ import { createAppContainer } from "react-navigation";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Discover from "../screens/Discover";
+import Splash from "../screens/Splash";
 import Register from "../screens/Signup";
 import EmailCheck from "../screens/EmailCheck";
 import ForgotPassword from "../screens/ForgotPassword";
@@ -12,6 +13,13 @@ import ResetPassword from "../screens/ResetPassword";
 import TabNavigator from "./tabNavigator";
 
 const screens = {
+  Splash: {
+    screen: Splash,
+    navigationOptions: {
+      title: "Home",
+      headerShown: false,
+    },
+  },
   Home: {
     screen: Home,
     navigationOptions: {

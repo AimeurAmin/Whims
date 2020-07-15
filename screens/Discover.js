@@ -86,7 +86,10 @@ export default function Discover({ navigation }) {
 
       <View style={styles.filtersSection}>
         <Text>No filters applied</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => navigation.navigate("Filter")}
+        >
           <Text style={styles.filerButtonText}>filter</Text>
         </TouchableOpacity>
       </View>

@@ -6,34 +6,30 @@ import Discover from "../screens/Discover";
 import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import Settings from "../screens/Settings";
+import Filter from "../screens/Filter";
 
 import { Ionicons } from "@expo/vector-icons";
 
 const activeColor = "#5735CE";
 const inactiveColor = "#b8bece";
 
-const HomeStack = createStackNavigator(
-  {
-    Home: {
-      screen: Discover,
-      navigationOptions: {
-        headerShown: false,
-      },
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: Discover,
+    navigationOptions: {
+      headerShown: false,
     },
   },
-  {
-    mode: "modal",
-  }
-);
+  Filter: {
+    screen: Filter,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+});
 
 HomeStack.navigationOptions = ({ navigation }) => {
   var tabBarVisible = true;
-  const routeName = navigation.state.routes[navigation.state.index].routeName;
-
-  if (routeName == "Section") {
-    tabBarVisible = false;
-  }
-
   return {
     tabBarVisible,
     tabBarLabel: " ",
@@ -48,7 +44,12 @@ HomeStack.navigationOptions = ({ navigation }) => {
 };
 
 const CartStack = createStackNavigator({
-  Cart: Cart,
+  Cart: {
+    screen: Cart,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
 });
 
 CartStack.navigationOptions = {
