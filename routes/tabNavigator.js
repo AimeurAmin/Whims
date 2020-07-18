@@ -111,4 +111,4 @@ const TabNavigator = createBottomTabNavigator({
   SettingsStack,
 });
 
-export default createAppContainer(TabNavigator);
+export default TabNavigator;

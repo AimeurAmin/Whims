@@ -10,7 +10,7 @@ import EmailCheck from "../screens/EmailCheck";
 import ForgotPassword from "../screens/ForgotPassword";
 import OTP from "../screens/OTP";
 import ResetPassword from "../screens/ResetPassword";
-import TabNavigator from "./tabNavigator";
+import DrawerNavigator from "./drawer";
 
 const screens = {
   Splash: {
@@ -35,7 +35,7 @@ const screens = {
     },
   },
   Discover: {
-    screen: TabNavigator,
+    screen: DrawerNavigator,
     navigationOptions: {
       title: "Discover Page",
       headerShown: false,
