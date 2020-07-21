@@ -8,7 +8,7 @@ import Profile from "../screens/Profile";
 import Settings from "../screens/Settings";
 import Filter from "../screens/Filter";
 
-import { Ionicons } from "@expo/vector-icons";
+import Icon from "../components/Icon";
 
 const activeColor = "#5735CE";
 const inactiveColor = "#b8bece";
@@ -34,8 +34,8 @@ HomeStack.navigationOptions = ({ navigation }) => {
     tabBarVisible,
     tabBarLabel: " ",
     tabBarIcon: ({ focused }) => (
-      <Ionicons
-        name="ios-home"
+      <Icon
+        name="home"
         size={26}
         color={focused ? activeColor : inactiveColor}
       />
@@ -56,9 +56,9 @@ CartStack.navigationOptions = {
   tabBarLabel: " ",
 
   tabBarIcon: ({ focused }) => (
-    <Ionicons
-      name="ios-cart"
-      size={26}
+    <Icon
+      name="Icon_Collection"
+      size={30}
       color={focused ? activeColor : inactiveColor}
     />
   ),
@@ -76,8 +76,8 @@ const ProfileStack = createStackNavigator({
 ProfileStack.navigationOptions = {
   tabBarLabel: " ",
   tabBarIcon: ({ focused }) => (
-    <Ionicons
-      name="ios-person"
+    <Icon
+      name="user-icon"
       size={26}
       color={focused ? activeColor : inactiveColor}
     />
@@ -96,8 +96,8 @@ const SettingsStack = createStackNavigator({
 SettingsStack.navigationOptions = {
   tabBarLabel: " ",
   tabBarIcon: ({ focused }) => (
-    <Ionicons
-      name="ios-settings"
+    <Icon
+      name="settings-icon"
       size={26}
       color={focused ? activeColor : inactiveColor}
     />

@@ -179,6 +179,7 @@ const DrawerNavigator = createDrawerNavigator(
   {
     drawerPosition: "left",
     drawerBackgroundColor: "transparent",
+    overlayColor: "rgba(50, 34, 105, 0.61)",
     drawerWidth: width * 0.8,
     initialRouteName: "Home",
     contentComponent: CustomDrawerComponent,

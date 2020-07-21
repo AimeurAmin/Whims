@@ -66,7 +66,8 @@ export default function Discover({ navigation }) {
         </View>
       </View>
       <View style={styles.categoriesBar}>
-        <Text style={styles.category}>All</Text>
+        <Text style={[styles.category]}>All</Text>
+
         <Text style={styles.category}>Men</Text>
         <Text style={styles.category}>Women</Text>
         <Text style={styles.category}>Best sellers</Text>
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: height * 0.07,
   },
+  category: {},
 
   catalog: {
     height: height * 0.7,
