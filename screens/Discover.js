@@ -51,7 +51,7 @@ export default function Discover({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleBar}>
-        <TouchableOpacity onPress={() => navigation.navigate("DrawerOpen")}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Image
             style={styles.menuLogo}
             source={require("../assets/icons/menu.png")}
