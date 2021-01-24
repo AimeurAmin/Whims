@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   submitContainer: {
     backgroundColor: "#5735CE",
     fontSize: 16,
-    borderRadius: 4,
+    borderRadius: 50,
     paddingVertical: 12,
     alignItems: "center",
     justifyContent: "center",

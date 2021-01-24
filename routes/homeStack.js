@@ -4,14 +4,22 @@ import { createAppContainer } from "react-navigation";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Discover from "../screens/Discover";
+import Splash from "../screens/Splash";
 import Register from "../screens/Signup";
 import EmailCheck from "../screens/EmailCheck";
 import ForgotPassword from "../screens/ForgotPassword";
 import OTP from "../screens/OTP";
 import ResetPassword from "../screens/ResetPassword";
-import { TouchableOpacity, Button } from "react-native";
+import DrawerNavigator from "./drawer";
 
 const screens = {
+  Splash: {
+    screen: Splash,
+    navigationOptions: {
+      title: "Home",
+      headerShown: false,
+    },
+  },
   Home: {
     screen: Home,
     navigationOptions: {
@@ -27,7 +35,7 @@ const screens = {
     },
   },
   Discover: {
-    screen: Discover,
+    screen: DrawerNavigator,
     navigationOptions: {
       title: "Discover Page",
       headerShown: false,

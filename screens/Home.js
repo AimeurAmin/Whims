@@ -59,9 +59,11 @@ const styles = StyleSheet.create({
   submitContainerGrey: {
     fontSize: 16,
     backgroundColor: "#fff",
-    borderRadius: 4,
+    borderRadius: 50,
     paddingVertical: 12,
+    width: width * 0.8,
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
     borderColor: "#C5CCD6",
     borderWidth: 0.5,

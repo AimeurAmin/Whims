@@ -12,7 +12,6 @@ const InputTextField = (props) => {
         secureTextEntry={props.isSecure}
         style={styles.input}
         onChange={props.onBlur}
-        // onBlur={props.onBlur}
         onChangeText={(_) => props.getData(_)}
       />
       <HelperText type="error" visible={props.hasErrors}>

@@ -37,7 +37,10 @@ const Card = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: width * 0.4,
-    height: width * 0.7,
+    height: width * 0.6,
+    alignSelf: "center",
+    marginHorizontal: width * 0.02,
+    marginBottom: height * 0.02,
   },
   image: {
     borderColor: "#CECECE",
